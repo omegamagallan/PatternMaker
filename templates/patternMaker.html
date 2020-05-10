@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container pattern_container">
+    <form class="pattern_generator_form was-validated" method="post" enctype="multipart/form-data" novalidate>
+        <div class="input-group mb-3">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="inputGroupFile01" accept="*image" name="image" required>
+                <label class="custom-file-label" for="inputGroupFile01">Выберите изображение</label>
+                <div class="invalid-feedback">Example invalid feedback text</div>
+            </div>
+        </div>
+        <div>
+            <select class="custom-select mb-3" id="inputGroupSelect01" name="scale" required>
+                <option value=10>10%</option>
+                <option value=20>20%</option>
+                <option value=30>30%</option>
+                <option value=40>40%</option>
+                <option value=50 selected>50%</option>
+                <option value=60>60%</option>
+                <option value=70>70%</option>
+                <option value=80>80%</option>
+                <option value=90>90%</option>
+                <option value=100>100%</option>
+            </select>
+        </div>
+        <input type="number" class="form-control mb-3" placeholder="Введите расстояние между изображениями"
+               name="width" required>
+        <div>
+            <select class="custom-select mb-3" id="inputGroupSelect02" name="pattern_name" required>
+                <option value=none_shift selected>Выберите паттерн</option>
+                <option value=none_shift>Стандарт</option>
+                <option value=vertical_shift>Сдвиг по вертикали(2 * 2)</option>
+                <option value=6_images_vertical_shift>Сдвиг по вертикали(6 * 6)</option>
+                <option value=horizontal_shift>Сдвиг по горизонтали</option>
+                <option value=wave_shift>Волна</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+    <div class="container" style="padding: 20px">
+        {% if start_image %}
+            <img class="rounded float-right" style="width: 100%" src="/static/start_pattern.png">
+            <button type="button" class="btn btn-outline-success btn-lg btn-block" disabled>Скачать</button>
+        {% else %}
+            <img class="rounded float-right" style="width: 100%" src="data:image/PNG;base64,{{image}}">
+            <a class="btn btn-outline-success btn-lg" style="width: 100%" href="data:image/PNG;base64,{{image}}" download>Скачать</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
